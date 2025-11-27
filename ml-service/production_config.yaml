@@ -1,0 +1,90 @@
+services:
+  sota_service:
+    type: flask
+    app_file: sota_app.py
+    port: 5000
+    workers: 4
+    threads: 2
+    timeout: 120
+    env_vars:
+      FLASK_ENV: production
+      MODEL_CACHE_SIZE: "3"
+      ENABLE_GPU: "true"
+      LOG_LEVEL: info
+    
+  enhanced_service:
+    type: flask
+    app_file: simple_enhanced_app.py
+    port: 5001
+    workers: 2
+    threads: 1
+    timeout: 60
+    env_vars:
+      FLASK_ENV: production
+      LOG_LEVEL: info
+  
+  monitoring_service:
+    type: flask
+    app_file: monitoring_app.py
+    port: 8080
+    workers: 1
+    threads: 1
+    timeout: 30
+    env_vars:
+      FLASK_ENV: production
+
+load_balancer:
+  enabled: true
+  port: 80
+  algorithm: round_robin
+  health_check_interval: 30
+
+environment:
+  PYTHONPATH: "."
+  CUDA_VISIBLE_DEVICES: "0"
+  TRANSFORMERS_CACHE: "./cache"
+  HF_HOME: "./hf_cache"
+  PYTORCH_CUDA_ALLOC_CONF: "max_split_size_mb:128"
+
+monitoring:
+  enabled: true
+  metrics_port: 9090
+  health_check_endpoint: "/health"
+  log_level: info
+  alerts:
+    high_cpu_threshold: 80
+    high_memory_threshold: 85
+    response_time_threshold: 10
+
+scaling:
+  auto_scale: true
+  min_instances: 2
+  max_instances: 8
+  cpu_target: 70
+  memory_target: 80
+  scale_up_cooldown: 300
+  scale_down_cooldown: 600
+
+security:
+  enable_cors: true
+  allowed_origins:
+    - "http://localhost:3000"
+    - "https://yourapp.vercel.app"
+  rate_limit:
+    requests_per_minute: 100
+    burst_limit: 200
+  api_key_required: false
+
+logging:
+  level: info
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file_rotation: true
+  max_file_size_mb: 100
+  backup_count: 5
+
+backup:
+  enabled: true
+  interval_hours: 24
+  keep_backups: 7
+  backup_models: true
+  backup_logs: true
