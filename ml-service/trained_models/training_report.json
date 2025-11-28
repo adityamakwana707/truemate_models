@@ -1,15 +1,15 @@
 {
-  "timestamp": "2025-11-27T19:11:07.668846",
+  "timestamp": "2025-11-27T19:34:48.768580",
   "training_summary": {
     "total_samples": 14,
     "test_samples": 3,
     "categories": [
+      "technology",
+      "economics",
+      "science",
       "politics",
       "health",
-      "technology",
-      "climate",
-      "science",
-      "economics"
+      "climate"
     ]
   },
   "model_performance": {

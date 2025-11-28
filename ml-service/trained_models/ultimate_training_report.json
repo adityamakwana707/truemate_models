@@ -1,0 +1,222 @@
+{
+  "timestamp": "2025-11-27T21:13:20.735377",
+  "training_summary": {
+    "total_samples": 540,
+    "label_distribution": {
+      "true": 210,
+      "false": 190,
+      "misleading": 140
+    },
+    "vectorizers_used": [
+      "ultimate_tfidf",
+      "ultimate_char",
+      "ultimate_hybrid"
+    ],
+    "models_trained": 21,
+    "web_enhanced": false,
+    "gemini_integration": false
+  },
+  "model_performance": {
+    "ultimate_rf_ultimate_tfidf": {
+      "accuracy": 0.9753086419753086,
+      "cv_mean": 0.8930917874396135,
+      "cv_std": 0.0350739609214528,
+      "vectorizer": "ultimate_tfidf",
+      "model_type": "ultimate_rf"
+    },
+    "ultimate_gb_ultimate_tfidf": {
+      "accuracy": 0.9753086419753086,
+      "cv_mean": 0.8953140096618359,
+      "cv_std": 0.030978239681321698,
+      "vectorizer": "ultimate_tfidf",
+      "model_type": "ultimate_gb"
+    },
+    "ultimate_xgb_ultimate_tfidf": {
+      "accuracy": 0.9629629629629629,
+      "cv_mean": 0.8998067632850241,
+      "cv_std": 0.019805820644471343,
+      "vectorizer": "ultimate_tfidf",
+      "model_type": "ultimate_xgb"
+    },
+    "ultimate_svm_ultimate_tfidf": {
+      "accuracy": 0.9629629629629629,
+      "cv_mean": 0.9040096618357488,
+      "cv_std": 0.030146669403409453,
+      "vectorizer": "ultimate_tfidf",
+      "model_type": "ultimate_svm"
+    },
+    "ultimate_mlp_ultimate_tfidf": {
+      "accuracy": 0.9506172839506173,
+      "cv_mean": 0.8952657004830918,
+      "cv_std": 0.04168373941340896,
+      "vectorizer": "ultimate_tfidf",
+      "model_type": "ultimate_mlp"
+    },
+    "ultimate_lr_ultimate_tfidf": {
+      "accuracy": 0.9382716049382716,
+      "cv_mean": 0.9041062801932368,
+      "cv_std": 0.024348257415089072,
+      "vectorizer": "ultimate_tfidf",
+      "model_type": "ultimate_lr"
+    },
+    "ultimate_rf_ultimate_char": {
+      "accuracy": 0.9382716049382716,
+      "cv_mean": 0.915072463768116,
+      "cv_std": 0.02037456437193043,
+      "vectorizer": "ultimate_char",
+      "model_type": "ultimate_rf"
+    },
+    "ultimate_gb_ultimate_char": {
+      "accuracy": 0.9629629629629629,
+      "cv_mean": 0.941256038647343,
+      "cv_std": 0.03226257531592206,
+      "vectorizer": "ultimate_char",
+      "model_type": "ultimate_gb"
+    },
+    "ultimate_xgb_ultimate_char": {
+      "accuracy": 0.9753086419753086,
+      "cv_mean": 0.9433333333333334,
+      "cv_std": 0.019992121951874622,
+      "vectorizer": "ultimate_char",
+      "model_type": "ultimate_xgb"
+    },
+    "ultimate_svm_ultimate_char": {
+      "accuracy": 0.9629629629629629,
+      "cv_mean": 0.9433333333333334,
+      "cv_std": 0.026138837299599274,
+      "vectorizer": "ultimate_char",
+      "model_type": "ultimate_svm"
+    },
+    "ultimate_mlp_ultimate_char": {
+      "accuracy": 0.9382716049382716,
+      "cv_mean": 0.9455555555555556,
+      "cv_std": 0.017469029215343605,
+      "vectorizer": "ultimate_char",
+      "model_type": "ultimate_mlp"
+    },
+    "ultimate_lr_ultimate_char": {
+      "accuracy": 0.9629629629629629,
+      "cv_mean": 0.9521739130434783,
+      "cv_std": 0.030434782608695667,
+      "vectorizer": "ultimate_char",
+      "model_type": "ultimate_lr"
+    },
+    "ultimate_rf_ultimate_hybrid": {
+      "accuracy": 0.9629629629629629,
+      "cv_mean": 0.8931400966183574,
+      "cv_std": 0.03041545279880118,
+      "vectorizer": "ultimate_hybrid",
+      "model_type": "ultimate_rf"
+    },
+    "ultimate_gb_ultimate_hybrid": {
+      "accuracy": 0.9629629629629629,
+      "cv_mean": 0.9018840579710146,
+      "cv_std": 0.02271297023758084,
+      "vectorizer": "ultimate_hybrid",
+      "model_type": "ultimate_gb"
+    },
+    "ultimate_xgb_ultimate_hybrid": {
+      "accuracy": 0.9506172839506173,
+      "cv_mean": 0.8954106280193237,
+      "cv_std": 0.016348571264751432,
+      "vectorizer": "ultimate_hybrid",
+      "model_type": "ultimate_xgb"
+    },
+    "ultimate_svm_ultimate_hybrid": {
+      "accuracy": 0.9629629629629629,
+      "cv_mean": 0.8996135265700484,
+      "cv_std": 0.031977465285327966,
+      "vectorizer": "ultimate_hybrid",
+      "model_type": "ultimate_svm"
+    },
+    "ultimate_mlp_ultimate_hybrid": {
+      "accuracy": 0.9506172839506173,
+      "cv_mean": 0.9062318840579711,
+      "cv_std": 0.03923255595490669,
+      "vectorizer": "ultimate_hybrid",
+      "model_type": "ultimate_mlp"
+    },
+    "ultimate_lr_ultimate_hybrid": {
+      "accuracy": 0.9382716049382716,
+      "cv_mean": 0.9084541062801932,
+      "cv_std": 0.02360361952884398,
+      "vectorizer": "ultimate_hybrid",
+      "model_type": "ultimate_lr"
+    },
+    "ultimate_ensemble_ultimate_tfidf": {
+      "accuracy": 0.9629629629629629,
+      "cv_mean": 0.9629629629629629,
+      "cv_std": 0.0,
+      "vectorizer": "ultimate_tfidf",
+      "model_type": "ensemble"
+    },
+    "ultimate_ensemble_ultimate_char": {
+      "accuracy": 0.9382716049382716,
+      "cv_mean": 0.9382716049382716,
+      "cv_std": 0.0,
+      "vectorizer": "ultimate_char",
+      "model_type": "ensemble"
+    },
+    "ultimate_ensemble_ultimate_hybrid": {
+      "accuracy": 0.9629629629629629,
+      "cv_mean": 0.9629629629629629,
+      "cv_std": 0.0,
+      "vectorizer": "ultimate_hybrid",
+      "model_type": "ensemble"
+    }
+  },
+  "best_model": "ultimate_rf_ultimate_tfidf",
+  "best_accuracy": 0.9753086419753086,
+  "top_5_models": [
+    [
+      "ultimate_rf_ultimate_tfidf",
+      {
+        "accuracy": 0.9753086419753086,
+        "cv_mean": 0.8930917874396135,
+        "cv_std": 0.0350739609214528,
+        "vectorizer": "ultimate_tfidf",
+        "model_type": "ultimate_rf"
+      }
+    ],
+    [
+      "ultimate_gb_ultimate_tfidf",
+      {
+        "accuracy": 0.9753086419753086,
+        "cv_mean": 0.8953140096618359,
+        "cv_std": 0.030978239681321698,
+        "vectorizer": "ultimate_tfidf",
+        "model_type": "ultimate_gb"
+      }
+    ],
+    [
+      "ultimate_xgb_ultimate_char",
+      {
+        "accuracy": 0.9753086419753086,
+        "cv_mean": 0.9433333333333334,
+        "cv_std": 0.019992121951874622,
+        "vectorizer": "ultimate_char",
+        "model_type": "ultimate_xgb"
+      }
+    ],
+    [
+      "ultimate_xgb_ultimate_tfidf",
+      {
+        "accuracy": 0.9629629629629629,
+        "cv_mean": 0.8998067632850241,
+        "cv_std": 0.019805820644471343,
+        "vectorizer": "ultimate_tfidf",
+        "model_type": "ultimate_xgb"
+      }
+    ],
+    [
+      "ultimate_svm_ultimate_tfidf",
+      {
+        "accuracy": 0.9629629629629629,
+        "cv_mean": 0.9040096618357488,
+        "cv_std": 0.030146669403409453,
+        "vectorizer": "ultimate_tfidf",
+        "model_type": "ultimate_svm"
+      }
+    ]
+  ]
+}

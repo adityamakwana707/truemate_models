@@ -20,3 +20,8 @@ googlesearch-python==1.2.3
 python-dotenv==1.0.0
 pillow==10.1.0
 opencv-python==4.8.1.78
+
+# Additional dependencies for FakeNewsNet training
+xgboost==2.0.0
+joblib==1.3.2
+pathlib2==2.3.7

@@ -1,0 +1,29 @@
+{
+  "timestamp": "2025-11-27T19:57:57.796621",
+  "training_summary": {
+    "total_samples": 56,
+    "label_distribution": {
+      "true": 20,
+      "false": 20,
+      "misleading": 16
+    }
+  },
+  "model_performance": {
+    "ultra_random_forest": {
+      "accuracy": 0.3333333333333333,
+      "cv_mean": 0.3388888888888889,
+      "cv_std": 0.06186404847588913
+    },
+    "ultra_gradient_boost": {
+      "accuracy": 0.3333333333333333,
+      "cv_mean": 0.5027777777777778,
+      "cv_std": 0.2344549760667688
+    },
+    "ultra_logistic": {
+      "accuracy": 0.3333333333333333,
+      "cv_mean": 0.5444444444444445,
+      "cv_std": 0.12372809695177828
+    }
+  },
+  "best_model": "ultra_random_forest"
+}
