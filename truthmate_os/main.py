@@ -5,6 +5,7 @@ from fastapi.staticfiles import StaticFiles
 from agents.link_agent import LinkSafetyAgent
 from agents.research import ResearchAgent
 from agents.linguistics_forensics import LinguisticAgent, ForensicsAgent
+from agents.deepfake_agent import DeepfakeAgent
 import uvicorn
 import os
 
@@ -17,12 +18,16 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 # Initialize Agents
 link_agent = LinkSafetyAgent()
 research_agent = ResearchAgent()
 linguist_agent = LinguisticAgent()
 forensics_agent = ForensicsAgent()
+deepfake_agent = DeepfakeAgent()
+
+# Mount static directory for ELA images
+os.makedirs("static", exist_ok=True)
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 @app.get("/", response_class=HTMLResponse)
 async def serve_ui():
@@ -67,6 +72,17 @@ async def text_analysis(text: str = Form(...)):
 async def media_check(file: UploadFile = File(...)):
     """Route for Media Forensics (Simulated for Demo)"""
     return {"message": "Media analysis is currently simulated for safety.", "status": "Files received"}
+
+@app.post("/api/deepfake-check")
+async def deepfake_check(file: UploadFile = File(...)):
+    """Route for Deepfake Detection Agent"""
+    # Save uploaded file
+    file_location = f"static/{file.filename}"
+    with open(file_location, "wb+") as file_object:
+        file_object.write(file.file.read())
+    
+    # Run Analysis
+    return deepfake_agent.analyze(file_location)
 
 if __name__ == "__main__":
     # Suppress GRPC logs

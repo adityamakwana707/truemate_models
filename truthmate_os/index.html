@@ -208,6 +208,7 @@
             <button class="tab-btn active" onclick="switchTab('link')">Link Safety Sandbox</button>
             <button class="tab-btn" onclick="switchTab('research')">Truth Graph Engine</button>
             <button class="tab-btn" onclick="switchTab('text')">Linguistic Forensics</button>
+            <button class="tab-btn" onclick="switchTab('deepfake')">Deepfake Forensics</button>
         </div>
 
         <!-- LINK AGENT TAB -->
@@ -275,6 +276,40 @@
             <button class="action" onclick="runTextAgent()">SCAN TEXT</button>
             <div id="textLoader" class="loader">>> PROCESSING LINGUISTICS...</div>
             <div id="textData" class="json-box" style="margin-top: 20px;">// Awaiting Data...</div>
+        </div>
+
+        <!-- DEEPFAKE AGENT TAB -->
+        <div id="deepfake" class="panel">
+            <h3>// Deepfake Forensics Lab</h3>
+            <p>Hybrid Analysis: Metadata Scan + Error Level Analysis (ELA) + Vision AI Reasoning.</p>
+
+            <div class="input-group">
+                <input type="file" id="deepfakeInput" accept="image/*">
+                <button class="action" onclick="runDeepfakeAgent()">ANALYZE IMAGE</button>
+            </div>
+            <div id="deepfakeLoader" class="loader">>> GENERATING ELA MAP & RUNNING VISION MODEL...</div>
+
+            <div class="output-grid">
+                <!-- Left: Visuals -->
+                <div>
+                    <h4>Forensic Imaging</h4>
+                    <div style="display: flex; gap: 10px; overflow-x: auto;">
+                        <div style="flex: 1;">
+                            <div>ORIGINAL</div>
+                            <img id="dfOriginal" style="max-width: 100%; border: 2px solid #333; display: none;">
+                        </div>
+                        <div style="flex: 1;">
+                            <div>ELA MAP</div>
+                            <img id="dfEla" style="max-width: 100%; border: 2px solid #333; display: none;">
+                        </div>
+                    </div>
+                </div>
+                <!-- Right: Data -->
+                <div>
+                    <h4>Forensic Report</h4>
+                    <div id="deepfakeData" class="json-box">// Awaiting Evidence...</div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -405,6 +440,40 @@
                 document.getElementById('textData').textContent = JSON.stringify(data, null, 2);
             } catch (e) { console.error(e); }
             document.getElementById('textLoader').style.display = 'none';
+        }
+
+        // --- DEEPFAKE AGENT ---
+        async function runDeepfakeAgent() {
+            const fileInput = document.getElementById('deepfakeInput');
+            if (fileInput.files.length === 0) return alert("Select an image first");
+
+            document.getElementById('deepfakeLoader').style.display = 'block';
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+
+            // Preview Original
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const img = document.getElementById('dfOriginal');
+                img.src = e.target.result;
+                img.style.display = 'block';
+            }
+            reader.readAsDataURL(fileInput.files[0]);
+
+            try {
+                const res = await fetch('/api/deepfake-check', { method: 'POST', body: formData });
+                const data = await res.json();
+
+                // Show ELA
+                if (data.ela_image_path) {
+                    const elaImg = document.getElementById('dfEla');
+                    elaImg.src = "/static/" + data.ela_image_path;
+                    elaImg.style.display = 'block';
+                }
+
+                document.getElementById('deepfakeData').textContent = JSON.stringify(data, null, 2);
+            } catch (e) { console.error(e); }
+            document.getElementById('deepfakeLoader').style.display = 'none';
         }
     </script>
 </body>

@@ -6,6 +6,8 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from config import settings
 import json
 
+import requests
+
 class LinkSafetyAgent:
     def __init__(self):
         self.llm = ChatGoogleGenerativeAI(model=settings.MODEL_FAST, temperature=0)
@@ -16,12 +18,37 @@ class LinkSafetyAgent:
         self.quarantine_dir = os.path.join(os.getcwd(), "truthmate_os", "quarantine_zone")
         os.makedirs(self.quarantine_dir, exist_ok=True)
 
+    def check_urlhaus(self, url: str):
+        """
+        Checks URL against URLHaus database for known malware.
+        """
+        try:
+            # URLHaus API expects form data 'url'
+            response = requests.post("https://urlhaus-api.abuse.ch/v1/url/", data={"url": url}, timeout=5)
+            if response.status_code == 200:
+                data = response.json()
+                if data.get("query_status") == "ok" and data.get("url_status") == "online":
+                    return {
+                        "is_malware": True,
+                        "tags": data.get("tags", []),
+                        "threat": data.get("threat", "malware_download")
+                    }
+            return {"is_malware": False}
+        except Exception as e:
+            print(f"⚠️ URLHaus Check Failed: {e}")
+            return {"is_malware": False, "error": str(e)}
+
     async def start_session(self, url: str):
         """
         Initializes a persistent browser session and navigates to the URL.
         """
         print(f"🕵️ Link Agent: Starting Interactive Session for {url}")
         
+        # 1. Threat Intelligence Check
+        threat_intel = self.check_urlhaus(url)
+        if threat_intel["is_malware"]:
+            print(f"🚨 CRITICAL WARNING: URLHaus flagged this site! Tags: {threat_intel.get('tags')}")
+
         if not self.playwright:
             self.playwright = await async_playwright().start()
             self.browser = await self.playwright.chromium.launch(headless=True)
@@ -37,7 +64,15 @@ class LinkSafetyAgent:
 
         try:
             response = await self.page.goto(url, wait_until="domcontentloaded", timeout=15000)
-            return await self._generate_report(url, response.status)
+            report = await self._generate_report(url, response.status)
+            
+            # Merge Threat Intel into Report
+            if threat_intel["is_malware"]:
+                report["safety_verdict"]["risk_type"] = "MALWARE (Confirmed by URLHaus)"
+                report["safety_verdict"]["safety_score"] = 0
+                report["safety_verdict"]["reason"] = f"Flagged by URLHaus. Tags: {threat_intel.get('tags')}"
+                
+            return report
         except Exception as e:
             return {"error": str(e), "status": "error"}
 
