@@ -1,0 +1,64 @@
+{
+  "timestamp": "2025-11-29T04:48:25.487242",
+  "training_system": "Ultimate Training System v2.0",
+  "performance_scores": {
+    "rf_ultimate": {
+      "train_accuracy": 1.0,
+      "test_accuracy": 1.0,
+      "cv_mean": 1.0,
+      "cv_std": 0.0,
+      "overall_score": 1.0
+    },
+    "gb_ultimate": {
+      "train_accuracy": 1.0,
+      "test_accuracy": 1.0,
+      "cv_mean": 1.0,
+      "cv_std": 0.0,
+      "overall_score": 1.0
+    },
+    "lr_ultimate": {
+      "train_accuracy": 1.0,
+      "test_accuracy": 1.0,
+      "cv_mean": 1.0,
+      "cv_std": 0.0,
+      "overall_score": 1.0
+    },
+    "svm_ultimate": {
+      "train_accuracy": 1.0,
+      "test_accuracy": 1.0,
+      "cv_mean": 1.0,
+      "cv_std": 0.0,
+      "overall_score": 1.0
+    },
+    "ada_ultimate": {
+      "train_accuracy": 0.85,
+      "test_accuracy": 0.85,
+      "cv_mean": 0.8203125,
+      "cv_std": 0.030055287596361478,
+      "overall_score": 0.83515625
+    },
+    "mlp_ultimate": {
+      "train_accuracy": 1.0,
+      "test_accuracy": 1.0,
+      "cv_mean": 1.0,
+      "cv_std": 0.0,
+      "overall_score": 1.0
+    },
+    "ultimate_ensemble": {
+      "train_accuracy": 1.0,
+      "test_accuracy": 1.0,
+      "cv_mean": 1.0,
+      "cv_std": 0,
+      "overall_score": 1.0
+    }
+  },
+  "best_model": "rf_ultimate",
+  "total_models": 7,
+  "feature_dimensions": {
+    "tfidf": 10000,
+    "count": 5000,
+    "linguistic": 15
+  },
+  "hackathon_optimized": true,
+  "web_scraping_enabled": true
+}
